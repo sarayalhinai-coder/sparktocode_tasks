@@ -19,6 +19,13 @@
             Console.WriteLine("the square of "+n+" = "+Math.Pow(n,2));
             Console.WriteLine("the square root of " + n + " = " + Math.Sqrt(n));
 
+            //task 3
+            Console.WriteLine("enter your full name :");
+            string name=Console.ReadLine();
+            Console.WriteLine("name in upper case : "+name.ToUpper());
+            Console.WriteLine("name in lower case : " + name.ToLower());
+            Console.WriteLine("name length : " + name.Length);
+
 
         }
     }
