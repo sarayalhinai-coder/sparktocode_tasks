@@ -34,6 +34,23 @@
             string finaldate= endoftrial.ToString("yyyy-MM-dd");
             Console.WriteLine("free trial ends on : "+finaldate);
 
+            //task 5 
+            Console.WriteLine("enter exam score:");
+            float score = float.Parse(Console.ReadLine());
+            double rounded= Math.Round(score);
+            Console.WriteLine("rounded score = "+rounded);
+            if ( rounded>=0 &&  rounded < 60)
+            {
+                Console.WriteLine("you failed");
+            }
+            else if ( rounded>= 60 && rounded<=100)
+            {
+                Console.WriteLine("you passed ! ");
+            }
+            else
+            {
+                Console.WriteLine("input invalid");
+            }
 
         }
     }
