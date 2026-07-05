@@ -34,7 +34,72 @@
             string finaldate= endoftrial.ToString("yyyy-MM-dd");
             Console.WriteLine("free trial ends on : "+finaldate);
 
+            //task 5 
+            Console.WriteLine("enter exam score:");
+            float score = float.Parse(Console.ReadLine());
+            double rounded= Math.Round(score);
+            Console.WriteLine("rounded score = "+rounded);
+            if ( rounded>=0 &&  rounded < 60)
+            {
+                Console.WriteLine("you failed");
+            }
+            else if ( rounded>= 60 && rounded<=100)
+            {
+                Console.WriteLine("you passed ! ");
+            }
+            else
+            {
+                Console.WriteLine("input invalid");
+            }
+
+            //task 6 
+            Console.WriteLine("enter a password : ");
+            string password= Console.ReadLine();
+            if (password.Length < 8 || (password.ToLower()).Contains("password"))
+            {
+                Console.WriteLine("password weak");
+            }
+            else
+            {
+                Console.WriteLine("password strong");
+            }
+
+            //task 7
+            Console.WriteLine("enter name: ");
+            string name1 = Console.ReadLine().Trim();
+            Console.WriteLine("enter the same name : ");
+            string name2 = Console.ReadLine().Trim();
+            name1 = name1.ToLower();
+            name2 = name2.ToLower();
+            if (name1 == name2)
+            {
+                Console.WriteLine("match");
+            }
+            else
+            {
+                Console.WriteLine("no match");
+            }
+
+            //task 8 
+            Console.WriteLine("enter  membership start date (e.g.\"2026-01-10\"): ");
+            DateTime start_date =DateTime.Parse(Console.ReadLine());
+
+            Console.WriteLine("enter number of valid membership days :  ");
+            int valid_days = int.Parse(Console.ReadLine());
+
+            DateTime expiry_date=start_date.AddDays(valid_days);
+            DateTime today2 = DateTime.Today;
+            if (expiry_date < today2)
+            {
+                Console.WriteLine("Expired");
+                Console.WriteLine("expiry date: " + expiry_date.ToString());
+            }
+            else
+            {
+                Console.WriteLine("Active");
+                Console.WriteLine("expiry date: " + expiry_date.ToString());
+            }
 
         }
-    }
+}
 }
