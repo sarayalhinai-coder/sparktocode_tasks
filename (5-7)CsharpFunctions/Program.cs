@@ -1,4 +1,6 @@
-﻿namespace _5_7_CsharpFunctions
+﻿using static System.Runtime.InteropServices.JavaScript.JSType;
+
+namespace _5_7_CsharpFunctions
 {
     internal class Program
     {
@@ -100,6 +102,75 @@
                 Console.WriteLine("expiry date: " + expiry_date.ToString());
             }
 
+            //task 9 
+            Console.WriteLine("enter a decimal number:");
+            double x = double.Parse(Console.ReadLine());
+            Console.WriteLine("nearest whole number:"+Math.Round(x));
+            Console.WriteLine("rounding up :" + Math.Ceiling(x));
+            Console.WriteLine("rounding down :" + Math.Floor(x));
+
+            //task 10 
+            Console.Write("enter a full sentence: ");
+            string sentence = Console.ReadLine();
+
+            Console.Write("enter a word to search for: ");
+            string word = Console.ReadLine();
+
+            int firstPos = sentence.IndexOf(word);
+            int lastPos = sentence.LastIndexOf(word);
+
+            if (firstPos == -1)
+            {
+                Console.WriteLine("Word not found.");
+            }
+            else
+            {
+                Console.WriteLine("First occurrence position: "+firstPos);
+                Console.WriteLine($"Last occurrence position: "+lastPos);
+            }
+
+            //task 11
+            Random random = new Random();
+            int randomnum = random.Next(1000,10000);
+            Console.WriteLine("code : "+randomnum);
+
+            int attempts = 0;
+            while (attempts < 3)
+            {
+                try
+                {
+                    Console.WriteLine("enter code: ");
+                    int usernum = int.Parse(Console.ReadLine());
+                    attempts++;
+                    if (usernum == randomnum)
+                    {
+                        Console.WriteLine("Verified");
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Verification Failed");
+                    }
+                }
+                catch (FormatException)
+                {
+                    attempts = attempts + 1;
+                    Console.WriteLine("wrong type of input try again");
+                }
+            }
+
+            //task 12 
+            Console.WriteLine("enter  your birthday (e.g.\"2026-01-10\"): ");
+            DateTime birthday = DateTime.Parse(Console.ReadLine());
+            DateTime today3 = DateTime.Today;
+            DayOfWeek weekday = birthday.DayOfWeek;
+            Console.WriteLine("you were born on a : "+weekday);
+            int age = today3.Year - birthday.Year;
+            if (today3.Month < birthday.Month || (today3.Month==birthday.Month && today3.Day<birthday.Day))
+            {
+                age = age - 1;
+            }
+            Console.WriteLine("your age= "+age);
         }
 }
 }
