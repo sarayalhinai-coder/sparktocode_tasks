@@ -26,6 +26,14 @@
             Console.WriteLine("name in lower case : " + name.ToLower());
             Console.WriteLine("name length : " + name.Length);
 
+            //task 4 
+            Console.WriteLine("enter the number of days of a free trial : ");
+            int days_free = int.Parse(Console.ReadLine());
+            DateTime today = DateTime.Today;
+            DateTime endoftrial = today.AddDays(days_free);
+            string finaldate= endoftrial.ToString("yyyy-MM-dd");
+            Console.WriteLine("free trial ends on : "+finaldate);
+
 
         }
     }
