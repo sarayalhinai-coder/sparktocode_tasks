@@ -106,6 +106,27 @@
             Console.WriteLine("nearest whole number:"+Math.Round(x));
             Console.WriteLine("rounding up :" + Math.Ceiling(x));
             Console.WriteLine("rounding down :" + Math.Floor(x));
+
+            //task 10 
+            Console.Write("enter a full sentence: ");
+            string sentence = Console.ReadLine();
+
+            Console.Write("enter a word to search for: ");
+            string word = Console.ReadLine();
+
+            int firstPos = sentence.IndexOf(word);
+            int lastPos = sentence.LastIndexOf(word);
+
+            if (firstPos == -1)
+            {
+                Console.WriteLine("Word not found.");
+            }
+            else
+            {
+                Console.WriteLine("First occurrence position: "+firstPos);
+                Console.WriteLine($"Last occurrence position: "+lastPos);
+            }
+
         }
     }
 }
