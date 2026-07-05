@@ -127,6 +127,35 @@
                 Console.WriteLine($"Last occurrence position: "+lastPos);
             }
 
-        }
+            //task 11
+            Random random = new Random();
+            int randomnum = random.Next(1000,10000);
+            Console.WriteLine("code : "+randomnum);
+
+            int attempts = 0;
+            while (attempts < 3)
+            {
+                try
+                {
+                    Console.WriteLine("enter code: ");
+                    int usernum = int.Parse(Console.ReadLine());
+                    attempts++;
+                    if (usernum == randomnum)
+                    {
+                        Console.WriteLine("Verified");
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Verification Failed");
+                    }
+                }
+                catch (FormatException)
+                {
+                    attempts = attempts + 1;
+                    Console.WriteLine("wrong type of input try again");
+                }
+            }
     }
+}
 }
