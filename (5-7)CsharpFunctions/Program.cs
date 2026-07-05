@@ -100,6 +100,12 @@
                 Console.WriteLine("expiry date: " + expiry_date.ToString());
             }
 
+            //task 9 
+            Console.WriteLine("enter a decimal number:");
+            double x = double.Parse(Console.ReadLine());
+            Console.WriteLine("nearest whole number:"+Math.Round(x));
+            Console.WriteLine("rounding up :" + Math.Ceiling(x));
+            Console.WriteLine("rounding down :" + Math.Floor(x));
         }
-}
+    }
 }
