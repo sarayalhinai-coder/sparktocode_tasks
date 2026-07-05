@@ -1,4 +1,6 @@
-﻿namespace _5_7_CsharpFunctions
+﻿using static System.Runtime.InteropServices.JavaScript.JSType;
+
+namespace _5_7_CsharpFunctions
 {
     internal class Program
     {
@@ -156,6 +158,19 @@
                     Console.WriteLine("wrong type of input try again");
                 }
             }
-    }
+
+            //task 12 
+            Console.WriteLine("enter  your birthday (e.g.\"2026-01-10\"): ");
+            DateTime birthday = DateTime.Parse(Console.ReadLine());
+            DateTime today3 = DateTime.Today;
+            DayOfWeek weekday = birthday.DayOfWeek;
+            Console.WriteLine("you were born on a : "+weekday);
+            int age = today3.Year - birthday.Year;
+            if (today3.Month < birthday.Month || (today3.Month==birthday.Month && today3.Day<birthday.Day))
+            {
+                age = age - 1;
+            }
+            Console.WriteLine("your age= "+age);
+        }
 }
 }
