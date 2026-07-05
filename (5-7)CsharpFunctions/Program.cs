@@ -13,6 +13,12 @@
             int result = Math.Abs(num1 - num2);
             Console.WriteLine("final positive difference= "+result);
 
+            //task 2 
+            Console.WriteLine("enter a number :");
+            int n = int.Parse(Console.ReadLine());
+            Console.WriteLine("the square of "+n+" = "+Math.Pow(n,2));
+            Console.WriteLine("the square root of " + n + " = " + Math.Sqrt(n));
+
 
         }
     }
