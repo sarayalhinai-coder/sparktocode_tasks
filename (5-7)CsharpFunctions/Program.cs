@@ -52,6 +52,19 @@
                 Console.WriteLine("input invalid");
             }
 
+            //task 6 
+            Console.WriteLine("enter a password : ");
+            string password= Console.ReadLine();
+            if (password.Length < 8 || (password.ToLower()).Contains("password"))
+            {
+                Console.WriteLine("password weak");
+            }
+            else
+            {
+                Console.WriteLine("password strong");
+            }
+
+            
         }
     }
 }
