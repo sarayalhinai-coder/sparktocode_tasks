@@ -64,7 +64,21 @@
                 Console.WriteLine("password strong");
             }
 
-            
-        }
+            //task 7
+            Console.WriteLine("enter name: ");
+            string name1 = Console.ReadLine().Trim();
+            Console.WriteLine("enter the same name : ");
+            string name2 = Console.ReadLine().Trim();
+            name1 = name1.ToLower();
+            name2 = name2.ToLower();
+            if (name1 == name2)
+            {
+                Console.WriteLine("match");
+            }
+            else
+            {
+                Console.WriteLine("no match");
+            }
     }
+}
 }
