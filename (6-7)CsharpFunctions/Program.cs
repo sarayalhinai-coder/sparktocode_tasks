@@ -81,6 +81,15 @@
             }
         }
 
+        //task 8 function 
+        static void Countdown(int n )
+        {
+            for (int i = n; i >= 1; i--) 
+            {
+                Console.WriteLine(i);
+            }
+        }
+
         static void Main(string[] args)
         {
             
@@ -131,6 +140,16 @@
             Console.Write("enter your score: ");
             int userScore = int.Parse(Console.ReadLine());
             Console.WriteLine("your grade : "+ GetGradeLetter(userScore));
+
+            
+
+            //task 8 main 
+            Console.WriteLine("enter number for count down : ");
+            int num = int.Parse(Console.ReadLine());
+            Countdown(num);
+
         }
+
     }
 }
+
