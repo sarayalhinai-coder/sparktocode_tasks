@@ -31,8 +31,22 @@
             Console.WriteLine("3) Exit)");
         }
 
+        //task 5 function 
+        static bool IsEven(int x) 
+        {
+            if ( x%2 ==0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+         }
+
         static void Main(string[] args)
         {
+            
             //task 1 main 
             Console.WriteLine("enter your name ");
             string name=Console.ReadLine();
@@ -50,7 +64,19 @@
 
             //task 4 main 
             DisplayMenu();
+            
 
+            //task 5 main
+            Console.WriteLine("enter number : ");
+            int n = int.Parse(Console.ReadLine());
+            if (IsEven(n))
+            {
+                Console.WriteLine("even");
+            }
+            else
+            {
+                Console.WriteLine("odd");
+            }
 
 
         }
