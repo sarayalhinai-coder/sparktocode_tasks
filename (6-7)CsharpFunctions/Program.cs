@@ -44,9 +44,22 @@
             }
          }
 
+        //task 6 function 
+        static double CalculateArea(double l , double w)
+        {
+            double area = w * l;
+            return area;
+        }
+        static double CalculatePerimeter(double l, double w)
+        {
+            double Perimeter = 2*(l+w);
+            return Perimeter;
+        }
+
         static void Main(string[] args)
         {
             
+           
             //task 1 main 
             Console.WriteLine("enter your name ");
             string name=Console.ReadLine();
@@ -77,8 +90,16 @@
             {
                 Console.WriteLine("odd");
             }
+            
 
+            //task 6 main 
+            Console.WriteLine("enter rectangle length: ");
+            double l = double.Parse(Console.ReadLine());
+            Console.WriteLine("enter rectangle width: ");
+            double w = double.Parse(Console.ReadLine());
 
+            Console.WriteLine(" rectangle area = "+CalculateArea(l,w));
+            Console.WriteLine(" rectangle perimeter = " + CalculatePerimeter(l,w));
         }
     }
 }
