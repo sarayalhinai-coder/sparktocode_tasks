@@ -90,10 +90,24 @@
             }
         }
 
+        //task 9 function 
+        static int Multiply(int a , int b)
+        {
+            return a * b;
+        }
+        static double Multiply(double a, double b)
+        {
+            return a * b;
+        }
+        static int Multiply(int a, int b , int c)
+        {
+            return a * b * c;
+        }
+
+
+
         static void Main(string[] args)
         {
-            
-           
             //task 1 main 
             Console.WriteLine("enter your name ");
             string name=Console.ReadLine();
@@ -148,7 +162,17 @@
             int num = int.Parse(Console.ReadLine());
             Countdown(num);
 
-        }
+            //task 9 main 
+            int result1 = Multiply(5, 4);
+            Console.WriteLine("(two Integers) 5 * 4 = " + result1);
+
+            double result2 = Multiply(2.5, 4.0);
+            Console.WriteLine("(two doubles) 2.5 * 4.0 = " + result2);
+            int result3 = Multiply(2, 3, 4);
+            Console.WriteLine("(three integers) 2 * 3 * 4 = " + result3);
+        
+
+    }
 
     }
 }
