@@ -21,6 +21,16 @@
             double f = (c * 9 / 5) + 32;
             return f;
         }
+
+        //task 4 function 
+        static void DisplayMenu()
+        {
+            Console.WriteLine("3-option menu : ");
+            Console.WriteLine("1) Start ");
+            Console.WriteLine("2) Help ");
+            Console.WriteLine("3) Exit)");
+        }
+
         static void Main(string[] args)
         {
             //task 1 main 
@@ -37,6 +47,11 @@
             Console.WriteLine("enter temperature in celsius:");
             int c = int.Parse(Console.ReadLine());
             Console.WriteLine( c + " in fahrenheit  = " + CelsiusToFahrenheit(c));
+
+            //task 4 main 
+            DisplayMenu();
+
+
 
         }
     }
