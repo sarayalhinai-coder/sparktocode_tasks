@@ -56,6 +56,31 @@
             return Perimeter;
         }
 
+        //task 7 function 
+        static string GetGradeLetter(int score)
+        {
+            if (score >= 90)
+            {
+                return "A";
+            }
+            else if (score >= 80)
+            {
+                return "B";
+            }
+            else if (score >= 70)
+            {
+                return "C";
+            }
+            else if (score >= 60)
+            {
+                return "D";
+            }
+            else
+            {
+                return "F";
+            }
+        }
+
         static void Main(string[] args)
         {
             
@@ -100,6 +125,12 @@
 
             Console.WriteLine(" rectangle area = "+CalculateArea(l,w));
             Console.WriteLine(" rectangle perimeter = " + CalculatePerimeter(l,w));
+
+            
+            //task 7 main 
+            Console.Write("enter your score: ");
+            int userScore = int.Parse(Console.ReadLine());
+            Console.WriteLine("your grade : "+ GetGradeLetter(userScore));
         }
     }
 }
