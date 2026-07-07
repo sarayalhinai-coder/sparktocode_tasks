@@ -114,9 +114,82 @@
             return length * width;
         }
 
+        //task 11 functions
+
+        static double Add (double a, double b)
+        {
+            return a + b;
+        }
+        static double Subtract(double a, double b)
+        {
+            return a - b;
+        }
+        static double MultiplyNumbers(double a, double b)
+        {
+            return a * b;
+        }
+
+        static double DivideNumbers(double a, double b)
+        {
+            try
+            {
+                return a / b;
+            }
+            catch (DivideByZeroException)
+            {
+                return 0;
+            }
+        }
+
+        static void DisplayResult(string operation , double result)
+        {
+            Console.WriteLine(operation+" result = "+result);
+        }
+
+        //task 12 function 
+        static double CalculateAverage(double score1, double score2, double score3)
+        {
+            return (score1 + score2 + score3) / 3;
+        }
+        static string GetGradeLetter(double average)
+        {
+            if (average >= 90)
+            {
+                return "A";
+            }
+            else if (average >= 80)
+            {
+                return "B";
+            }
+            else if (average >= 70)
+            {
+                return "C";
+            }
+            else if (average >= 60)
+            {
+                return "D";
+            }
+
+            else
+            {
+                return "F";
+            }
+        }
+
+        static void PrintReportCard(string name, double average, string gradeLetter)
+        {
+            Console.WriteLine("STUDENT REPORT CARD");
+            Console.WriteLine("student name : "+ name);
+            Console.WriteLine("grade average : " + average);
+            Console.WriteLine("grade letter : " + gradeLetter);
+        }
+
+
+
 
         static void Main(string[] args)
         {
+            
             
             //task 1 main 
             Console.WriteLine("enter your name ");
@@ -208,11 +281,77 @@
                     Console.WriteLine("Invalid choice");
                     break;
             }
+            
+            //task 11 main 
+            bool running = true; 
+            while (running)
+            {
+                Console.WriteLine("=== Calculator Menu ===");
+                Console.WriteLine("1. Add");
+                Console.WriteLine("2. Subtract");
+                Console.WriteLine("3. Multiply");
+                Console.WriteLine("4. Divide");
+                Console.WriteLine("5. Exit");
+                Console.Write("Choose an option (1-5): ");
+                string choice = Console.ReadLine();
 
+                switch (choice)
+                {
+                    case "1":
+                        Console.Write("enter first number: ");
+                        double num1 = double.Parse(Console.ReadLine());
+                        Console.Write("enter second number: ");
+                        double num2 = double.Parse(Console.ReadLine());
+                        double sum = Add(num1, num2);
+                        DisplayResult("Addition", sum);
+                        break;
+                    case "2":
+                        Console.Write("enter first number: ");
+                        double num3 = double.Parse(Console.ReadLine());
+                        Console.Write("Enter second number: ");
+                        double num4 = double.Parse(Console.ReadLine());
+                        double difference = Subtract(num3, num4);
+                        DisplayResult("Subtraction", difference);
+                        break;
+                    case "3":
+                        Console.Write("Enter first number: ");
+                        double num5 = double.Parse(Console.ReadLine());
+                        Console.Write("Enter second number: ");
+                        double num6 = double.Parse(Console.ReadLine());
+                        double product = MultiplyNumbers(num5, num6);
+                        DisplayResult("Multiplication", product);
+                        break;
+                    case "4":
+                        Console.Write("Enter first number: ");
+                        double num7 = double.Parse(Console.ReadLine());
+                        Console.Write("Enter second number: ");
+                        double num8 = double.Parse(Console.ReadLine());
+                        double quotient = DivideNumbers(num7, num8);
+                        DisplayResult("Division", quotient);
+                        break;
+                    case "5":
+                        running = false;
+                        Console.WriteLine("Exiting calculator");
+                        break;
+                }
+            }
 
+            
+            //task 12 main 
+            Console.Write("enter student name: ");
+            string studentName = Console.ReadLine();
 
+            Console.Write("enter score for Subject 1: ");
+            double s1 = double.Parse(Console.ReadLine());
+            Console.Write("enter score for Subject 2: ");
+            double s2 = double.Parse(Console.ReadLine());
+            Console.Write("enter score for Subject 3: ");
+            double s3 = double.Parse(Console.ReadLine());
 
+            double averageScore = CalculateAverage(s1, s2, s3);
+            string finalGrade = GetGradeLetter(averageScore);
 
+            PrintReportCard(studentName, averageScore, finalGrade);
 
 
         }
