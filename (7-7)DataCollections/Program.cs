@@ -31,6 +31,21 @@
                 Console.WriteLine(a);
             }
 
+            //task 3 
+            Stack<string> history =new Stack<string>();
+            for (int i = 0;i < 3; i++)
+            {
+                Console.WriteLine("enter website URL : ");
+                string URL = Console.ReadLine();
+                history.Push(URL);
+            }
+            for (int i = 0; i < 3; i++)
+            {
+                var removedItem = history.Pop();
+                Console.WriteLine($"\nvisited URl : {removedItem}");
+            }
+
+            
         }
     }
 }
