@@ -18,6 +18,37 @@
         {
             return gradesList.Find(x => x < 60);
         }
+
+        //task 10 function 
+        static Queue<string> RemoveJob(Queue<string> oldQueue, string targetJob)
+        {
+            Queue<string> filteredQueue = new Queue<string>();
+            while (oldQueue.Count > 0)
+            {
+                string currentJob = oldQueue.Dequeue();
+                if (currentJob != targetJob)
+                {
+                    filteredQueue.Enqueue(currentJob);
+                }
+            }
+
+            return filteredQueue;
+        }
+
+        static void PrintQueue(Queue<string> queue)
+        {
+            if (queue.Count == 0)
+            {
+                Console.WriteLine("Queue is empty");
+                return;
+            }
+
+            foreach (string job in queue)
+            {
+                Console.WriteLine(job);
+            }
+        }
+
         static void Main(string[] args)
         {
             
@@ -173,6 +204,30 @@
             {
                 Console.WriteLine("First Failing Grade: "+firstFailing);
             }
+            
+            //task 10 
+            Queue<string> jobs = new Queue<string>();
+            while (true)
+            {
+                Console.WriteLine("add job or type 'done' to exit : ");
+                string input = Console.ReadLine();
+                if (input == "done")
+                {
+                    break;
+                }
+                jobs.Enqueue(input);
+            }
+            Console.WriteLine("Queue Before Cancellation : ");
+            PrintQueue(jobs);
+
+            Console.WriteLine("enter one job to cancel : ");
+            string cancel=Console.ReadLine();
+            jobs = RemoveJob(jobs, cancel);
+
+            Console.WriteLine("Queue after Cancellation : ");
+            PrintQueue(jobs);
+
+
         }
     }
 }
