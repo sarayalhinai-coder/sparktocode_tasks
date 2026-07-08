@@ -39,13 +39,27 @@
                 string URL = Console.ReadLine();
                 history.Push(URL);
             }
+            Console.WriteLine("-- user history ---");
             for (int i = 0; i < 3; i++)
             {
                 var removedItem = history.Pop();
                 Console.WriteLine($"\nvisited URl : {removedItem}");
             }
 
-            
+            //task 4
+            Queue<string> line = new Queue<string>();
+            for (int i = 0; i < 3; i++)
+            {
+                Console.WriteLine("enter customer name: ");
+                string customer = Console.ReadLine();
+                line.Enqueue(customer);
+            }
+            Console.WriteLine("-- serve customer ---");
+            for (int i = 0; i < 3; i++)
+            {
+                var removedItem = line.Dequeue();
+                Console.WriteLine($"\ncostomer: {removedItem}");
+            }
         }
     }
 }
