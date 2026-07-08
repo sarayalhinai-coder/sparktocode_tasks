@@ -100,6 +100,19 @@
             {
                 Console.WriteLine(item);
             }
+            
+            //task 7 
+            List<int> scores = new List<int>();
+            for (int i = 0;i < 5; i++)
+            {
+                Console.WriteLine("enter game score: ");
+                scores.Add(int.Parse(Console.ReadLine()));
+            }
+            scores.Sort();
+            scores.Reverse();
+            Console.WriteLine("1st place: " + scores[0]);
+            Console.WriteLine("2nd place: " + scores[1]);
+            Console.WriteLine("3rd place: " + scores[2]);
         }
     }
 }
