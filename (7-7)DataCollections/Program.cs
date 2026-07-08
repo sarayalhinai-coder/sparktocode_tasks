@@ -78,6 +78,28 @@
                 sum=sum+i;
             }
             Console.WriteLine(" the average ="+ sum/5);
+
+            //task 6
+            List<string> shopping= new List<string>();
+            while (true)
+            {
+                Console.WriteLine("add item to cart or type 'done' to exit : ");
+                string input = Console.ReadLine();
+                if (input == "done")
+                {
+                    break;
+                }
+                shopping.Add(input);
+            }
+            Console.WriteLine("enter item to remove: ");
+            string itemremove= Console.ReadLine();
+            shopping.Remove(itemremove);
+
+            Console.WriteLine("-- final list --");
+            foreach (string item in shopping)
+            {
+                Console.WriteLine(item);
+            }
         }
     }
 }
