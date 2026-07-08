@@ -2,6 +2,22 @@
 {
     internal class Program
     {
+
+        //task 9 function 
+        static double CalculateAverage(List<int> gradesList)
+        {
+            int sum = 0;
+            foreach (int grade in gradesList)
+            {
+                sum += grade;
+            }
+            return sum / gradesList.Count;
+        }
+
+        static int FindFirstFailing(List<int> gradesList)
+        {
+            return gradesList.Find(x => x < 60);
+        }
         static void Main(string[] args)
         {
             
@@ -135,7 +151,28 @@
                 Console.WriteLine(action);
             }
 
+            //task 9 
+            Console.Write("How many grades do you want to enter? ");
+            int count = int.Parse(Console.ReadLine() );
 
+            List<int> gradees = new List<int>();
+            for (int i = 0; i < count; i++)
+            {
+                Console.Write("Enter grade: ");
+                int grade = int.Parse(Console.ReadLine());
+                gradees.Add(grade);
+            }
+            Console.WriteLine("the average grade = "+CalculateAverage(gradees));
+
+            int firstFailing = FindFirstFailing(gradees);
+            if (firstFailing == 0)
+            {
+                Console.WriteLine("First Failing Grade: No failing grades found!");
+            }
+            else
+            {
+                Console.WriteLine("First Failing Grade: "+firstFailing);
+            }
         }
     }
 }
