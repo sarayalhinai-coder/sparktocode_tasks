@@ -113,6 +113,29 @@
             Console.WriteLine("1st place: " + scores[0]);
             Console.WriteLine("2nd place: " + scores[1]);
             Console.WriteLine("3rd place: " + scores[2]);
+            
+
+            //task 8 
+            Stack<string> actions = new Stack<string>();
+            while (true)
+            {
+                Console.WriteLine("enter action or type 'stop' to exit : ");
+                string action = Console.ReadLine();
+                if (action == "stop")
+                {
+                    break;
+                }
+                actions.Push(action);
+            }
+            actions.Pop();
+            actions.Pop();
+            Console.WriteLine("--actions list--");
+            foreach (string action in actions)
+            {
+                Console.WriteLine(action);
+            }
+
+
         }
     }
 }
