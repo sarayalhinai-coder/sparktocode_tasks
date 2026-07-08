@@ -4,6 +4,7 @@
     {
         static void Main(string[] args)
         {
+            
             //task 1 
             int[] grades=new int[5];
             for (int i = 0; i < 5; i++) 
@@ -60,6 +61,23 @@
                 var removedItem = line.Dequeue();
                 Console.WriteLine($"\ncostomer: {removedItem}");
             }
+            
+            //task 5 
+            int[] Grades = new int[5];
+            for (int i = 0; i < 5; i++)
+            {
+                Console.WriteLine("enter grade : ");
+                Grades[i] = int.Parse(Console.ReadLine());
+            }
+            Grades.Sort();
+            Console.WriteLine(" lowest grade = " + Grades[0]);
+            Console.WriteLine(" highest grade = " + Grades[4]);
+            float sum = 0;
+            foreach (int i in Grades) 
+            { 
+                sum=sum+i;
+            }
+            Console.WriteLine(" the average ="+ sum/5);
         }
     }
 }
