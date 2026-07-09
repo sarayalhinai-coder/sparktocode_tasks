@@ -20,7 +20,7 @@ namespace BankingManagementConsoleApp
                 Console.WriteLine("4. Show Balance");
                 Console.WriteLine("5. Transfer Amount");
                 Console.WriteLine("6. List all accounts");
-                Console.WriteLine("7. Close Account");
+                Console.WriteLine("7. Close ");
                 Console.WriteLine("8. Exit");
                 Console.Write("Choose an option: ");
                 int choice;
@@ -79,7 +79,7 @@ namespace BankingManagementConsoleApp
             string accountnum = Console.ReadLine() ??"";
             if (accountNumbers.Contains(accountnum))
             {
-                Console.WriteLine("ERROR: Acount number already used");
+                Console.WriteLine("ERROR: Account number already used");
                 return;
             }
             
@@ -133,12 +133,12 @@ namespace BankingManagementConsoleApp
                 }
                 catch (FormatException)
                 {
-                    Console.WriteLine("ERROR: That wasn't a valid number.");
+                    Console.WriteLine("ERROR: That wasn't a valid number");
                     return;
                 }
                 catch (ArgumentOutOfRangeException)
                 {
-                    Console.WriteLine("ERROR: Deposit amount must not be negative.");
+                    Console.WriteLine("ERROR: Deposit amount must not be negative");
                     return;
                 }
                 balances[account_index] = balances[account_index] + amount;
@@ -146,7 +146,7 @@ namespace BankingManagementConsoleApp
             }
             else
             {
-                Console.WriteLine("ERROR: Account number not found.");
+                Console.WriteLine("ERROR: Account number not found");
             }
         }
 
@@ -174,12 +174,12 @@ namespace BankingManagementConsoleApp
                 }
                 catch (FormatException)
                 {
-                    Console.WriteLine("ERROR: That wasn't a valid number.");
+                    Console.WriteLine("ERROR: That wasn't a valid number");
                     return;
                 }
                 catch (ArgumentOutOfRangeException)
                 {
-                    Console.WriteLine("ERROR: withdraw amount must not be negative.");
+                    Console.WriteLine("ERROR: Withdraw amount must be positive");
                     return;
                 }
                 balances[account_index] = balances[account_index] - amount;
@@ -187,7 +187,7 @@ namespace BankingManagementConsoleApp
             }
             else
             {
-                Console.WriteLine("ERROR: Account number not found.");
+                Console.WriteLine("ERROR: Account number not found");
             }
         }
 
