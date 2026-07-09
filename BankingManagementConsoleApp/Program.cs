@@ -42,6 +42,12 @@
                     case 3:
                         WithdrawMoney();
                         break;
+                    case 4:
+                        ShowBalance();
+                        break;
+                    case 5:
+                        TransferAmount();
+                        break; 
 
                 }
 
@@ -169,5 +175,80 @@
             }
         }
 
+        static void ShowBalance()
+        {
+            Console.Write("Enter account number:");
+            string user_accountnum = Console.ReadLine() ?? "";
+            if (accountNumbers.Contains(user_accountnum))
+            {
+                int account_index = accountNumbers.IndexOf(user_accountnum);
+                Console.WriteLine("---Account details---");
+                Console.WriteLine("Customer's name: "+customerNames[account_index]);
+                Console.WriteLine("Account number: " + accountNumbers[account_index]);
+                Console.WriteLine("Current balance: " + balances[account_index]);
+            }
+            else
+            {
+                Console.WriteLine("ERROR: Account number not found.");
+            }
+        }
+
+        static void TransferAmount()
+        {
+            Console.Write("Enter sender's account number:");
+            string sender_accountnum = Console.ReadLine() ?? "";
+            Console.Write("Enter receiver's account number:");
+            string receiver_accountnum = Console.ReadLine() ?? "";
+            if (accountNumbers.Contains(sender_accountnum) && accountNumbers.Contains(receiver_accountnum))
+            {
+                int sender_index= accountNumbers.IndexOf(sender_accountnum);
+                int receiver_index= accountNumbers.IndexOf(receiver_accountnum);
+
+                Console.Write("Enter transfer amount :");
+                double amount;
+                try
+                {
+                    amount = double.Parse(Console.ReadLine() ?? "0");
+                    if (amount <= 0)
+                    {
+                        throw new ArgumentOutOfRangeException("Transfer amount must be positive");
+                    }
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine("ERROR: That wasn't a valid number.");
+                    return;
+                }
+                catch (ArgumentOutOfRangeException)
+                {
+                    Console.WriteLine("ERROR: Transfer amount must be positive.");
+                    return;
+                }
+                if (amount > balances[sender_index])
+                {
+                    Console.WriteLine("ERROR: Transfer amount exceeds sender's balance.");
+                }
+                else
+                {
+                    balances[sender_index] = balances[sender_index] - amount;
+                    balances[receiver_index] = balances[receiver_index] + amount;
+
+                    Console.WriteLine("Transfer completed successfully");
+                    Console.WriteLine("sender's balance: " + balances[sender_index]);
+                    Console.WriteLine("receiver's balance: " + balances[receiver_index]);
+                }
+            }
+            else
+            {
+                if (!accountNumbers.Contains(sender_accountnum))
+                {
+                    Console.WriteLine("ERROR: sender account number not found ");
+                }
+                if (!accountNumbers.Contains(receiver_accountnum))
+                {
+                    Console.WriteLine("ERROR: receiver account number not found ");
+                }
+            }
+        }
     }
 }
