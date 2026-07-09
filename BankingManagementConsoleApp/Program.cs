@@ -39,6 +39,10 @@
                     case 2:
                         DepositMoney();
                         break;
+                    case 3:
+                        WithdrawMoney();
+                        break;
+
                 }
 
             }
@@ -102,7 +106,7 @@
                     amount = double.Parse(Console.ReadLine() ?? "0");
                     if (amount <= 0)
                     {
-                        throw new ArgumentOutOfRangeException("Deposit amount must be positive");
+                        throw new ArgumentOutOfRangeException("ERROR: Deposit amount must be positive");
                     }
                 }
                 catch (FormatException)
@@ -116,6 +120,47 @@
                     return;
                 }
                 balances[account_index] = balances[account_index] + amount;
+                Console.WriteLine("Updated balance is " + balances[account_index]);
+            }
+            else
+            {
+                Console.WriteLine("ERROR: Account number not found.");
+            }
+        }
+
+        static void WithdrawMoney()
+        {
+            Console.Write("Enter account number:");
+            string user_accountnum = Console.ReadLine() ?? "";
+            if (accountNumbers.Contains(user_accountnum)) 
+            {
+                int account_index = accountNumbers.IndexOf(user_accountnum);
+                Console.Write("Enter withdraw amount:");
+                double amount;
+                try
+                {
+                    amount = double.Parse(Console.ReadLine() ?? "0");
+                    if (amount <= 0)
+                    {
+                        throw new ArgumentOutOfRangeException("ERROR:withdraw amount must be positive");
+                    }
+                    if (amount > balances[account_index])
+                    {
+                        Console.WriteLine("ERROR: withdraw amount exceeds account balance");
+                        return;
+                    }
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine("ERROR: That wasn't a valid number.");
+                    return;
+                }
+                catch (ArgumentOutOfRangeException)
+                {
+                    Console.WriteLine("ERROR: withdraw amount must not be negative.");
+                    return;
+                }
+                balances[account_index] = balances[account_index] - amount;
                 Console.WriteLine("Updated balance is " + balances[account_index]);
             }
             else
