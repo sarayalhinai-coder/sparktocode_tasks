@@ -36,6 +36,9 @@
                     case 1:
                         AddAccount();
                         break;
+                    case 2:
+                        DepositMoney();
+                        break;
                 }
 
             }
@@ -53,7 +56,6 @@
                 Console.WriteLine("ERROR: Acount number already used");
                 return;
             }
-            Console.WriteLine(" ");
             
             Console.Write("Enter initial deposit amount (must not be negative) : ");
             double initial_deposit ;
@@ -84,6 +86,42 @@
             Console.WriteLine("Customer name : "+name);
             Console.WriteLine("Account number : " + accountnum);
             Console.WriteLine("Account balance : " + initial_deposit);
+        }
+
+        static void DepositMoney()
+        {
+            Console.Write("Enter account number:");
+            string user_accountnum= Console.ReadLine() ??"";
+            if (accountNumbers.Contains((user_accountnum))) 
+            {
+                int account_index = accountNumbers.IndexOf(user_accountnum);
+                Console.Write("Enter deposit amount:");
+                double amount;
+                try
+                {
+                    amount = double.Parse(Console.ReadLine() ?? "0");
+                    if (amount <= 0)
+                    {
+                        throw new ArgumentOutOfRangeException("Deposit amount must be positive");
+                    }
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine("ERROR: That wasn't a valid number.");
+                    return;
+                }
+                catch (ArgumentOutOfRangeException)
+                {
+                    Console.WriteLine("ERROR: Deposit amount must not be negative.");
+                    return;
+                }
+                balances[account_index] = balances[account_index] + amount;
+                Console.WriteLine("Updated balance is " + balances[account_index]);
+            }
+            else
+            {
+                Console.WriteLine("ERROR: Account number not found.");
+            }
         }
 
     }
