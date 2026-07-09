@@ -17,7 +17,7 @@
                 Console.WriteLine("3. Withdraw Money");
                 Console.WriteLine("4. Show Balance");
                 Console.WriteLine("5. Transfer Amount");
-                Console.WriteLine("6. <your 1st custom service - choose a name>");
+                Console.WriteLine("6. List all accounts");
                 Console.WriteLine("7. <your 2nd custom service - choose a name>");
                 Console.WriteLine("8. Exit");
                 Console.Write("Choose an option: ");
@@ -47,7 +47,10 @@
                         break;
                     case 5:
                         TransferAmount();
-                        break; 
+                        break;
+                    case 6:
+                        ShowAll();
+                        break;
 
                 }
 
@@ -248,6 +251,18 @@
                 {
                     Console.WriteLine("ERROR: receiver account number not found ");
                 }
+            }
+        }
+
+        static void ShowAll()
+        {
+            Console.WriteLine("--- List of all accounts ---");
+            for (int i=0; i < accountNumbers.Count; i++)
+            {
+                Console.WriteLine("Account number: "+ accountNumbers[i]);
+                Console.WriteLine("Customer's name: " + customerNames[i]);
+                Console.WriteLine("Current balance: " + balances[i]);
+                Console.WriteLine("--------------------------------" );
             }
         }
     }
