@@ -1,4 +1,6 @@
-﻿namespace BankingManagementConsoleApp
+﻿using System.Xml.Linq;
+
+namespace BankingManagementConsoleApp
 {
     internal class Program
     {
@@ -18,7 +20,7 @@
                 Console.WriteLine("4. Show Balance");
                 Console.WriteLine("5. Transfer Amount");
                 Console.WriteLine("6. List all accounts");
-                Console.WriteLine("7. <your 2nd custom service - choose a name>");
+                Console.WriteLine("7. Close Account");
                 Console.WriteLine("8. Exit");
                 Console.Write("Choose an option: ");
                 int choice;
@@ -51,6 +53,17 @@
                     case 6:
                         ShowAll();
                         break;
+                    case 7:
+                        CloseAccount();
+                        break;
+                    case 8:
+                        exitApp = true;
+                        Console.WriteLine("Thank you for banking with Spark Bank. Goodbye!");
+                        break;
+                    default:
+                        Console.WriteLine("Invalid option, please choose between 1 and 8.");
+                        break;
+
 
                 }
 
@@ -263,6 +276,30 @@
                 Console.WriteLine("Customer's name: " + customerNames[i]);
                 Console.WriteLine("Current balance: " + balances[i]);
                 Console.WriteLine("--------------------------------" );
+            }
+        }
+
+        static void CloseAccount()
+        {
+            Console.Write("Enter account number:");
+            string user_accountnum = Console.ReadLine() ?? "";
+            if (accountNumbers.Contains(user_accountnum)) 
+            {
+                int account_index = accountNumbers.IndexOf(user_accountnum);
+                string name = customerNames[account_index];
+                double balance = balances[account_index];
+
+                balances.RemoveAt(account_index);
+                customerNames.RemoveAt(account_index);
+                accountNumbers.RemoveAt(account_index);
+                Console.WriteLine("Account closed successfully.");
+                Console.WriteLine("Customer name: " + name);
+                Console.WriteLine("Account number: " + user_accountnum);
+                Console.WriteLine("Final balance: " + balance);
+            }
+            else
+            {
+                Console.WriteLine("ERROR: Account number not found.");
             }
         }
     }
