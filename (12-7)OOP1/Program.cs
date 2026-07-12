@@ -63,13 +63,87 @@
         {
             Console.WriteLine("Email has been sent");
         }
-
     }
+
+    public class Product()
+    {
+        public string? ProductName;
+        public double Price;
+        public int StockQuantity;
+
+        public void Sell(int quantity)
+        {
+            if (quantity > StockQuantity)
+            {
+                Console.WriteLine("not enough stock");
+                LogTransaction();
+                return;
+            }
+            else
+            {
+                StockQuantity -= quantity;
+                LogTransaction();
+            }
+        }
+
+        public void Restock(int quantity)
+        {
+            StockQuantity += quantity;
+            LogTransaction();
+        }
+
+        public double GetInventoryValue()
+        {
+            PrintDetails();
+            return Price * StockQuantity;
+        }
+
+        private void LogTransaction()
+        {
+            Console.WriteLine("Transaction logged ");
+        }
+
+        private void PrintDetails()
+        {
+            Console.WriteLine("Product name: "+ProductName);
+            Console.WriteLine("Price: "+Price);
+            Console.WriteLine("Stock quantity: "+StockQuantity);
+        }
+    }
+
     internal class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            BankAccount bankAccount1 = new BankAccount();
+            bankAccount1.AccountNumber = 1163;
+            bankAccount1.HolderName = "Karim";
+            bankAccount1.Balance = 120;
+
+            BankAccount bankAccount2 = new BankAccount();
+            bankAccount2.AccountNumber = 15203;
+            bankAccount2.HolderName = "Ali";
+            bankAccount2.Balance = 63;
+
+            Student student1 = new Student();
+            student1.Name = "Ali";
+            student1.Address = "Muscat";
+            student1.Grade = 65;
+
+            Student student2 = new Student();
+            student2.Name = "Ahmed";
+            student2.Address = "Muscat";
+            student2.Grade = 70;
+
+            Product product1 = new Product();
+            product1.ProductName = "Wireless Mouse";
+            product1.Price = 5.5;
+            product1.StockQuantity = 50;
+
+            Product product2 = new Product();
+            product2.ProductName = "Mechanical Keyboard";
+            product2.Price = 15.75;
+            product2.StockQuantity = 20 ;
         }
     }
 }
