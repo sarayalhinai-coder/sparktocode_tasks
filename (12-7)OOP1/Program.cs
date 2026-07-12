@@ -45,6 +45,26 @@
         }
 
     }
+
+    public class Student()
+    {
+        public int Grade;
+        public string? Name;
+        public string? Address;
+        private string? Email;
+        int age; 
+
+        public void Register(string email)
+        {
+            Email = email;
+            SendEmail();
+        }
+        private void SendEmail()
+        {
+            Console.WriteLine("Email has been sent");
+        }
+
+    }
     internal class Program
     {
         static void Main(string[] args)
