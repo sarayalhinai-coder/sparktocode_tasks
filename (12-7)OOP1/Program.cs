@@ -30,7 +30,6 @@
         public double CheckBalance()
         {
             PrintInformation();
-            Console.Write("current Balance: ");
             return Balance;
         }
         private void PrintInformation()
@@ -95,6 +94,7 @@
         public double GetInventoryValue()
         {
             PrintDetails();
+            Console.WriteLine("total inventory value: "+ Price * StockQuantity);
             return Price * StockQuantity;
         }
 
@@ -182,6 +182,225 @@
                 }
                 switch (choice)
                 {
+                    case 1: 
+                        Console.WriteLine("pick one of the two Bank Accounts(1 or 2): ");
+                        try
+                        {
+                            int account_choice = int.Parse(Console.ReadLine() ?? "0");
+                            if (account_choice == 1)
+                            {
+                                bankAccount1.CheckBalance();
+                            }
+                            else if (account_choice == 2)
+                            {
+                                bankAccount2.CheckBalance();
+                            }
+                            else
+                            {
+                                Console.WriteLine("Invalid input. Please enter 1 or 2");
+                                continue;
+                            }
+                        }
+                        catch (Exception)
+                        {
+                            Console.WriteLine("Invalid input.");
+                            continue;
+                        }
+                        break;
+
+                    case 2:
+                        Console.WriteLine("Pick one of the two students(1 or 2): ");
+                        try
+                        {
+                            int student_choice = int.Parse(Console.ReadLine() ?? "0");
+                            if (student_choice == 1)
+                            {
+                                Console.WriteLine("Enter new address: ");
+                                string new_address = Console.ReadLine()??"";
+                                student1.Address= new_address;
+                                Console.WriteLine("Adress changed. new addres: "+student1.Address);
+
+                            }else if (student_choice == 2)
+                            {
+                                Console.WriteLine("Enter new address: ");
+                                string new_address = Console.ReadLine() ?? "";
+                                student2.Address = new_address;
+                                Console.WriteLine("Adress changed. new addres: " + student2.Address);
+                            }
+                            else
+                            {
+                                Console.WriteLine("Invalid input. Please enter 1 or 2");
+                                continue;
+                            }
+                        }
+                        catch (Exception)
+                        {
+                            Console.WriteLine("Invalid input.");
+                            continue;
+                        }
+                        break;
+
+                    case 3:
+                        Console.WriteLine("pick one of the two Bank Accounts(1 or 2): ");
+                        try
+                        {
+                            int account_choice = int.Parse(Console.ReadLine() ?? "0");
+                            if (account_choice == 1)
+                            {
+                                Console.WriteLine("Enter deposit amount: ");
+                                double amount;
+                                try
+                                {
+                                    amount = double.Parse(Console.ReadLine() ?? "0");
+                                    if (amount <= 0)
+                                    {
+                                        throw new ArgumentOutOfRangeException("ERROR: Deposit amount must be positive");
+                                    }
+                                }
+                                catch (FormatException)
+                                {
+                                    Console.WriteLine("ERROR: That wasn't a valid number");
+                                    continue;
+                                }
+                                catch (ArgumentOutOfRangeException)
+                                {
+                                    Console.WriteLine("ERROR: Deposit amount must not be negative");
+                                    continue;
+                                }
+                                bankAccount1.Deposit(amount);
+                                bankAccount1.CheckBalance();
+                            }
+                            else if (account_choice == 2)
+                            {
+                                Console.WriteLine("Enter deposit amount: ");
+                                double amount;
+                                try
+                                {
+                                    amount = double.Parse(Console.ReadLine() ?? "0");
+                                    if (amount <= 0)
+                                    {
+                                        throw new ArgumentOutOfRangeException("ERROR: Deposit amount must be positive");
+                                    }
+                                }
+                                catch (FormatException)
+                                {
+                                    Console.WriteLine("ERROR: That wasn't a valid number");
+                                    continue;
+                                }
+                                catch (ArgumentOutOfRangeException)
+                                {
+                                    Console.WriteLine("ERROR: Deposit amount must not be negative");
+                                    continue;
+                                }
+                                bankAccount2.Deposit(amount);
+                                bankAccount2.CheckBalance();
+                            }
+                            else
+                            {
+                                Console.WriteLine("Invalid input. Please enter 1 or 2");
+                                continue;
+                            }
+                        }
+                        catch (Exception)
+                        {
+                            Console.WriteLine("Invalid input.");
+                            continue;
+                        }
+                        break;
+
+                    case 4:
+                        Console.WriteLine("pick one of the two Bank Accounts(1 or 2): ");
+                        try
+                        {
+                            int account_choice = int.Parse(Console.ReadLine() ?? "0");
+                            if (account_choice == 1)
+                            {
+                                Console.WriteLine("Enter withdrawal amount: ");
+                                double amount;
+                                try
+                                {
+                                    amount = double.Parse(Console.ReadLine() ?? "0");
+                                    if (amount <= 0)
+                                    {
+                                        throw new ArgumentOutOfRangeException("ERROR: withdrawal amount must be positive");
+                                    }
+                                }
+                                catch (FormatException)
+                                {
+                                    Console.WriteLine("ERROR: That wasn't a valid number");
+                                    continue;
+                                }
+                                catch (ArgumentOutOfRangeException)
+                                {
+                                    Console.WriteLine("ERROR: Deposit amount must not be negative");
+                                    continue;
+                                }
+                                bankAccount1.Withdraw(amount);
+                                bankAccount1.CheckBalance();
+                            }
+                            else if (account_choice == 2)
+                            {
+                                Console.WriteLine("Enter withdrawal amount: ");
+                                double amount;
+                                try
+                                {
+                                    amount = double.Parse(Console.ReadLine() ?? "0");
+                                    if (amount <= 0)
+                                    {
+                                        throw new ArgumentOutOfRangeException("ERROR: withdrawal amount must be positive");
+                                    }
+                                }
+                                catch (FormatException)
+                                {
+                                    Console.WriteLine("ERROR: That wasn't a valid number");
+                                    continue;
+                                }
+                                catch (ArgumentOutOfRangeException)
+                                {
+                                    Console.WriteLine("ERROR: Deposit amount must not be negative");
+                                    continue;
+                                }
+                                bankAccount2.Withdraw(amount);
+                                bankAccount2.CheckBalance();
+                            }
+                            else
+                            {
+                                Console.WriteLine("Invalid input. Please enter 1 or 2");
+                                continue;
+                            }
+                        }
+                        catch (Exception)
+                        {
+                            Console.WriteLine("Invalid input.");
+                            continue;
+                        }
+                        break;
+
+                    case 5:
+                        Console.WriteLine("pick one of the two products (1 or 2): ");
+                        try
+                        {
+                            int product_choice = int.Parse(Console.ReadLine() ?? "0");
+                            if (product_choice == 1)
+                            {
+                                product1.GetInventoryValue();
+                            }
+                            else if (product_choice == 2)
+                            {
+                                product2.GetInventoryValue();
+                            }
+                            else
+                            {
+                                Console.WriteLine("Invalid input. Please enter 1 or 2");
+                                continue;
+                            }
+                        }
+                        catch (Exception)
+                        {
+                            Console.WriteLine("Invalid input.");
+                            continue;
+                        }
+                        break;
 
                     default:
                         Console.WriteLine("Invalid option, please choose between 1 and 20.");
