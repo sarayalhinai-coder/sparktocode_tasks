@@ -40,7 +40,7 @@
 
         private void SendEmail()
         {
-            Console.WriteLine("Email has been sent");
+            Console.WriteLine(" ");//place holder
         }
 
     }
@@ -60,7 +60,7 @@
         }
         private void SendEmail()
         {
-            Console.WriteLine("Email has been sent");
+            Console.WriteLine(" ");//place holder
         }
     }
 
@@ -399,6 +399,178 @@
                         {
                             Console.WriteLine("Invalid input.");
                             continue;
+                        }
+                        break;
+
+                    case 6:
+                        Console.WriteLine("Pick one of the two students(1 or 2): ");
+                        try
+                        {
+                            int student_choice = int.Parse(Console.ReadLine() ?? "0");
+                            if (student_choice == 1)
+                            {
+                                Console.WriteLine("Enter email: ");
+                                string user_email= Console.ReadLine()??"";
+                                student1.Register(user_email);
+                                Console.WriteLine("Email added ");
+
+                            }
+                            else if (student_choice == 2)
+                            {
+                                Console.WriteLine("Enter email: ");
+                                string user_email = Console.ReadLine()??"";
+                                student2.Register(user_email);
+                                Console.WriteLine("Email added ");
+                            }
+                            else
+                            {
+                                Console.WriteLine("Invalid input. Please enter 1 or 2");
+                                continue;
+                            }
+                        }
+                        catch (Exception)
+                        {
+                            Console.WriteLine("Invalid input.");
+                            continue;
+                        }
+                        break;
+
+                    case 7:
+                        if (bankAccount1.Balance > bankAccount2.Balance)
+                        {
+                            Console.WriteLine("Bank account 1 has more money");
+                        }
+                        else if (bankAccount1.Balance < bankAccount2.Balance)
+                        {
+                            Console.WriteLine("Bank account 2 has more money");
+                        }else if (bankAccount1.Balance == bankAccount2.Balance)
+                        {
+                            Console.WriteLine("Both accounts have the same amount of money");
+                        }
+                        break;
+
+                    case 8:
+                        Console.WriteLine("pick one of the two products (1 or 2): ");
+                        try
+                        {
+                            int product_choice = int.Parse(Console.ReadLine() ?? "0");
+                            if (product_choice == 1)
+                            {
+                                Console.WriteLine("Enter a quantity to add");
+                                int quantity = int.Parse(Console.ReadLine() ?? "0");
+                                product1.Restock(quantity);
+                                if (product1.StockQuantity <10)
+                                {
+                                    Console.WriteLine("Stock level low ");
+                                }else if (10 <= product1.StockQuantity && 49>=product1.StockQuantity)
+                                {
+                                    Console.WriteLine("Stock level moderate ");
+                                }else if (product1.StockQuantity >= 50)
+                                {
+                                    Console.WriteLine("Product is well stocked");
+                                }
+                            }
+                            else if (product_choice == 2)
+                            {
+                                Console.WriteLine("Enter a quantity to add");
+                                int quantity = int.Parse(Console.ReadLine() ?? "0");
+                                product2.Restock(quantity);
+                                if (product2.StockQuantity < 10)
+                                {
+                                    Console.WriteLine("Stock level low ");
+                                }
+                                else if (10 <= product2.StockQuantity && 49 >= product2.StockQuantity)
+                                {
+                                    Console.WriteLine("Stock level moderate ");
+                                }
+                                else if (product2.StockQuantity >= 50)
+                                {
+                                    Console.WriteLine("Product is well stocked");
+                                }
+                            }
+                            else
+                            {
+                                Console.WriteLine("Invalid input. Please enter 1 or 2");
+                                continue;
+                            }
+                        }
+                        catch (Exception)
+                        {
+                            Console.WriteLine("Invalid input.");
+                            continue;
+                        }
+                        break;
+
+                    case 9:
+                        Console.WriteLine("Select source account (1 or 2): ");
+                        try
+                        {
+                            int srcChoice = int.Parse(Console.ReadLine()??"");
+                            BankAccount source;
+                            if (srcChoice == 1)
+                            {
+                                source = bankAccount1;
+                            }
+                            else
+                            {
+                                source = bankAccount2;
+                            }
+
+                            Console.WriteLine("Select destination account (1 or 2): ");
+                            int destChoice = int.Parse(Console.ReadLine()??"0");
+                            BankAccount destination;
+                            if (destChoice == 1)
+                            {
+                                destination = bankAccount1;
+                            }
+                            else
+                            {
+                                destination= bankAccount2;
+                            }
+
+                            Console.WriteLine("Enter amount to transfer: ");
+                            double transferAmount = double.Parse(Console.ReadLine()??"0");
+
+                            if (source.Balance >= transferAmount)
+                            {
+                                source.Withdraw(transferAmount);
+                                destination.Deposit(transferAmount);
+                                Console.WriteLine("Transfer successful");
+                            }
+                            else
+                            {
+                                Console.WriteLine("Transfer failed: insufficient balance in source account");
+                            }
+                        }
+                        catch (FormatException)
+                        {
+                            Console.WriteLine("Invalid input");
+                        }
+                        break;
+
+                    case 10:
+                        Console.WriteLine("Select student (1 or 2): ");
+                        try
+                        {
+                            int studentChoice = int.Parse(Console.ReadLine());
+                            Student selectedStudent = studentChoice == 1 ? student1 : student2;
+
+                            Console.WriteLine("Enter new grade: ");
+                            int newGrade = int.Parse(Console.ReadLine());
+
+                            if (newGrade < 0 || newGrade > 100)
+                            {
+                                Console.WriteLine("Invalid grade: must be between 0 and 100");
+                            }
+                            else
+                            {
+                                selectedStudent.Grade = newGrade;
+                                Console.WriteLine("Grade updated successfully");
+                            }
+                        }
+                        catch (FormatException)
+                        {
+                            Console.WriteLine("Invalid input: grade must be a number");
                         }
                         break;
 
