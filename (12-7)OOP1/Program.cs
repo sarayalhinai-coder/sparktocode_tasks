@@ -6,7 +6,7 @@
         public int AccountNumber { get; set; }
         public string? HolderName { get; set; }
         public double Balance { get; set; }
-        
+
         public void Deposit(double amount)
         {
             Balance += amount;
@@ -35,8 +35,8 @@
         }
         private void PrintInformation()
         {
-            Console.WriteLine("Holder name: "+HolderName);
-            Console.WriteLine("Balance: "+Balance);
+            Console.WriteLine("Holder name: " + HolderName);
+            Console.WriteLine("Balance: " + Balance);
         }
 
         private void SendEmail()
@@ -52,7 +52,7 @@
         public string? Name;
         public string? Address;
         private string? Email;
-        int age; 
+        int age;
 
         public void Register(string email)
         {
@@ -105,9 +105,9 @@
 
         private void PrintDetails()
         {
-            Console.WriteLine("Product name: "+ProductName);
-            Console.WriteLine("Price: "+Price);
-            Console.WriteLine("Stock quantity: "+StockQuantity);
+            Console.WriteLine("Product name: " + ProductName);
+            Console.WriteLine("Price: " + Price);
+            Console.WriteLine("Stock quantity: " + StockQuantity);
         }
     }
 
@@ -143,7 +143,52 @@
             Product product2 = new Product();
             product2.ProductName = "Mechanical Keyboard";
             product2.Price = 15.75;
-            product2.StockQuantity = 20 ;
+            product2.StockQuantity = 20;
+
+            bool exitApp = false;
+            while (!exitApp)
+            {
+                Console.WriteLine("\nOOP Part 1 - Bank / Student / Product Manager");
+                Console.WriteLine("1. View Account Details");
+                Console.WriteLine("2. Update Student Address");
+                Console.WriteLine("3. Make a Deposit");
+                Console.WriteLine("4. Make a Withdrawal");
+                Console.WriteLine("5. View Product Details");
+                Console.WriteLine("6. Register a Student");
+                Console.WriteLine("7. Compare Two Account Balances");
+                Console.WriteLine("8. Restock Product & Stock Level Check");
+                Console.WriteLine("9. Transfer Between Accounts");
+                Console.WriteLine("10. Update Student Grade (Validated)");
+                Console.WriteLine("11. Student Report Card");
+                Console.WriteLine("12. Account Health Status");
+                Console.WriteLine("13. Bulk Sale With Revenue Calculation");
+                Console.WriteLine("14. Scholarship Eligibility Check");
+                Console.WriteLine("15. Full Balance Top-Up Flow");
+                Console.WriteLine("16. Quick Account Opening (Parameterized Constructor)");
+                Console.WriteLine("17. Total Students Counter (Static Field & Method)");
+                Console.WriteLine("18. Overdrawn Account Check (Read-Only Property)");
+                Console.WriteLine("19. Set Student Security PIN (Write-Only Property)");
+                Console.WriteLine("20. Exit");
+                Console.Write("Choose an option: ");
+                int choice;
+                try
+                {
+                    choice = int.Parse(Console.ReadLine() ?? "0");
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("Invalid input. Please enter a number from 1 to 20.");
+                    continue;
+                }
+                switch (choice)
+                {
+
+                    default:
+                        Console.WriteLine("Invalid option, please choose between 1 and 20.");
+                        break;
+                }
+            }
+
         }
     }
 }
