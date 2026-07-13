@@ -7,6 +7,22 @@
         public string? HolderName { get; set; }
         public double Balance { get; set; }
 
+        //case 18 
+        public bool Overdrawn
+        {
+            get { return Balance < 0; }
+        }
+
+        //case 16 (Parameterized Constructor):
+        public BankAccount()
+        {
+        }
+        public BankAccount(int accountNO, string holder_name, double balance)
+        {
+            AccountNumber = accountNO;
+            HolderName = holder_name;
+            Balance = balance;
+        }
         public void Deposit(double amount)
         {
             Balance += amount;
@@ -45,7 +61,7 @@
 
     }
 
-    public class Student()
+    public class Student
     {
         public int Grade;
         public string? Name;
@@ -53,6 +69,25 @@
         private string? Email;
         int age;
 
+        // case 19 (Write-Only Property):
+        private int pin;
+        public int PIN
+        {
+            set { pin = value; }
+        }
+
+        //case 17 
+        private static int studentCount = 0;
+
+        public Student()
+        {
+            studentCount++;
+        }
+
+        public static int GetTotalStudents()
+        {
+            return studentCount;
+        }
         public void Register(string email)
         {
             Email = email;
@@ -746,6 +781,73 @@
                         }
                         break;
 
+                    case 16:
+                        Console.WriteLine("Enter account number: ");
+                        int newAccNo = int.Parse(Console.ReadLine() ?? "0");
+                        Console.WriteLine("Enter holder name: ");
+                        string newHolder = Console.ReadLine() ?? "";
+                        Console.WriteLine("Enter starting balance: ");
+                        double newBalance = double.Parse(Console.ReadLine() ?? "0");
+
+                        BankAccount newAccount = new BankAccount(newAccNo, newHolder, newBalance);
+                        Console.WriteLine("New account created:");
+                        newAccount.CheckBalance();
+                        break;
+
+                    case 17:
+                        int totalStudents = Student.GetTotalStudents();
+                        Console.WriteLine("Total students created: " + totalStudents);
+                        break;
+
+                    case 18:
+                        Console.WriteLine("pick one of the two Bank Accounts(1 or 2): ");
+                        try
+                        {
+                            int account_choice = int.Parse(Console.ReadLine() ?? "0");
+                            BankAccount overdrawnCheckAccount = account_choice == 1 ? bankAccount1 : bankAccount2;
+
+                            if (overdrawnCheckAccount.Overdrawn)
+                            {
+                                Console.WriteLine("This account is overdrawn");
+                            }
+                            else
+                            {
+                                Console.WriteLine("This account is not overdrawn");
+                            }
+                        }
+                        catch (Exception)
+                        {
+                            Console.WriteLine("Invalid input.");
+                            continue;
+                        }
+                        break;
+
+                    case 19:
+                        Console.WriteLine("Pick one of the two students(1 or 2): ");
+                        try
+                        {
+                            int student_choice = int.Parse(Console.ReadLine() ?? "0");
+                            Student pinStudent = student_choice == 1 ? student1 : student2;
+
+                            Console.WriteLine("Enter a 4-digit PIN: ");
+                            int newPin = int.Parse(Console.ReadLine() ?? "0");
+
+                            if (newPin < 1000 || newPin > 9999)
+                            {
+                                Console.WriteLine("Invalid PIN: must be exactly 4 digits");
+                            }
+                            else
+                            {
+                                pinStudent.PIN = newPin;
+                                Console.WriteLine("PIN has been set successfully");
+                            }
+                        }
+                        catch (Exception)
+                        {
+                            Console.WriteLine("Invalid input.");
+                            continue;
+                        }
+                        break;
 
                     default:
                         Console.WriteLine("Invalid option, please choose between 1 and 20.");
