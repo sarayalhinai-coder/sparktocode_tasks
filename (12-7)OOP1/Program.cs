@@ -552,11 +552,11 @@
                         Console.WriteLine("Select student (1 or 2): ");
                         try
                         {
-                            int studentChoice = int.Parse(Console.ReadLine());
+                            int studentChoice = int.Parse(Console.ReadLine()??"");
                             Student selectedStudent = studentChoice == 1 ? student1 : student2;
 
                             Console.WriteLine("Enter new grade: ");
-                            int newGrade = int.Parse(Console.ReadLine());
+                            int newGrade = int.Parse(Console.ReadLine()??"");
 
                             if (newGrade < 0 || newGrade > 100)
                             {
@@ -573,6 +573,179 @@
                             Console.WriteLine("Invalid input: grade must be a number");
                         }
                         break;
+
+                    case 11:
+                        Console.WriteLine("Pick one of the two students(1 or 2): ");
+                        try
+                        {
+                            int student_choice = int.Parse(Console.ReadLine() ?? "0");
+                            if (student_choice == 1)
+                            {
+                                Console.WriteLine("Student name: "+student1.Name);
+                                Console.WriteLine("Student address: " + student1.Address);
+                                Console.WriteLine("Student grade: " + student1.Grade);
+                                if (student1.Grade >= 60)
+                                {
+                                    Console.WriteLine("Pass");
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Fail");
+                                }
+
+                            }
+                            else if (student_choice == 2)
+                            {
+                                Console.WriteLine("Student name: " + student2.Name);
+                                Console.WriteLine("Student address: " + student2.Address);
+                                Console.WriteLine("Student grade: " + student2.Grade);
+                                if (student1.Grade >= 60)
+                                {
+                                    Console.WriteLine("Pass");
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Fail");
+                                }
+
+                            }
+                            else
+                            {
+                                Console.WriteLine("Invalid input. Please enter 1 or 2");
+                                continue;
+                            }
+                        }
+                        catch (Exception)
+                        {
+                            Console.WriteLine("Invalid input.");
+                            continue;
+                        }
+                        break;
+
+                    case 12:
+                        Console.WriteLine("pick one of the two Bank Accounts(1 or 2): ");
+                        try
+                        {
+                            int account_choice = int.Parse(Console.ReadLine() ?? "0");
+                            BankAccount healthAccount = account_choice == 1 ? bankAccount1 : bankAccount2;
+                            if (healthAccount.Balance < 50)
+                            {
+                                Console.WriteLine("Account status: Low Balance ");
+                            }
+                            else if (healthAccount.Balance <= 1000)
+                            { 
+                                Console.WriteLine("Account status: Healthy ");
+                            }
+                            else
+                            {
+                                Console.WriteLine("Account status: Premium ");
+                            }
+                        }
+                        catch (Exception)
+                        {
+                            Console.WriteLine("Invalid input.");
+                            continue;
+                        }
+                        break;
+
+                    case 13:
+                        Console.WriteLine("pick one of the two products (1 or 2): ");
+                        try
+                        {
+                            int product_choice = int.Parse(Console.ReadLine() ?? "0");
+                            Product selectedProduct = product_choice == 1 ? product1 : product2;
+                            int sellQuantity = int.Parse(Console.ReadLine()??"");
+
+                            if (sellQuantity > selectedProduct.StockQuantity)
+                            {
+                                int shortfall = sellQuantity - selectedProduct.StockQuantity;
+                                Console.WriteLine("Not enough stock. Need " + shortfall + " more unit(s) to fulfill this order");
+                            }
+                            else
+                            {
+                                selectedProduct.Sell(sellQuantity);
+                                double revenue = sellQuantity * selectedProduct.Price;
+                                Console.WriteLine("Sale successful. Revenue: " + revenue);
+                            }
+                        }
+                        catch (Exception)
+                        {
+                            Console.WriteLine("Invalid input.");
+                            continue;
+                        }
+                        break;
+
+                    case 14:
+                        Console.WriteLine("pick one of the two Bank Accounts(1 or 2): ");
+                        try
+                        {
+                            int account_choice = int.Parse(Console.ReadLine() ?? "0");
+                            BankAccount Account = account_choice == 1 ? bankAccount1 : bankAccount2;
+
+                            Console.WriteLine("pick one of the two students (1 or 2): ");
+                            try
+                            {
+                                int student_choice = int.Parse(Console.ReadLine() ?? "0");
+                                Student student = student_choice == 1 ? student1 : student2;
+
+                                if (student.Grade >= 80 && Account.Balance >= 100)
+                                {
+                                    Console.WriteLine("Eligible");
+                                }
+                                else
+                                {
+                                    if (student.Grade < 80)
+                                    {
+                                        Console.WriteLine("NOT Eligible , student grade too low");
+                                    }
+                                    else if (Account.Balance < 100)
+                                    {
+                                        Console.WriteLine("NOT Eligible , account balance too low");
+                                    }
+                                }
+                            }
+                            catch (Exception)
+                            {
+                                Console.WriteLine("Invalid input.");
+                                continue;
+                            }
+
+                        }
+                        catch (Exception)
+                        {
+                            Console.WriteLine("Invalid input.");
+                            continue;
+                        }
+                        break;
+
+                    case 15:
+                        Console.WriteLine("pick one of the two Bank Accounts(1 or 2): ");
+                        try
+                        {
+                            int account_choice = int.Parse(Console.ReadLine() ?? "0");
+                            BankAccount topUpAccount = account_choice == 1 ? bankAccount1 : bankAccount2;
+
+                            double balanceBefore = topUpAccount.Balance;
+
+                            if (balanceBefore < 50)
+                            {
+                                double topUpAmount = 100 - balanceBefore;
+                                topUpAccount.Deposit(topUpAmount);
+                                Console.WriteLine("Balance before: " + balanceBefore);
+                                Console.WriteLine("Balance after: " + topUpAccount.Balance);
+                            }
+                            else
+                            {
+                                Console.WriteLine("No top-up needed. Balance is already 50 or above");
+                            }
+                        }
+                        catch (Exception)
+                        {
+                            Console.WriteLine("Invalid input.");
+                            continue;
+                        }
+                        break;
+
 
                     default:
                         Console.WriteLine("Invalid option, please choose between 1 and 20.");
