@@ -6,12 +6,12 @@ namespace _14_7_HotelManagementSystem
 {
     public class Room
     {
-        public int roomNumber { get; set; }
+        public string roomNumber { get; set; }
         public string roomType { get; set; }
         public double PricePerNight { get; set; }
         public bool IsAvailable { get; set; }
 
-        public Room(int roomNO , string type, double price , bool avilable)
+        public Room(string roomNO , string type, double price , bool avilable)
         {
             roomNumber=roomNO;
             roomType=type;

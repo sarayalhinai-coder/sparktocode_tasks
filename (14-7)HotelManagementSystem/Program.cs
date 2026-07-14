@@ -8,12 +8,12 @@
         public static void Main(string[] args)
         {
 
-            rooms.Add(new Room(101, "Single", 25.00,true));
-            rooms.Add(new Room(102, "Single", 25.00, true));
-            rooms.Add(new Room(201, "Double", 40.00, true));
-            rooms.Add(new Room(202, "Double", 40.00, true));
-            rooms.Add(new Room(301, "Suite", 75.00, true));
-            rooms.Add(new Room(302, "Suite", 80.00, true));
+            rooms.Add(new Room("101", "Single", 25.00,true));
+            rooms.Add(new Room("102", "Single", 25.00, true));
+            rooms.Add(new Room("201", "Double", 40.00, true));
+            rooms.Add(new Room("202", "Double", 40.00, true));
+            rooms.Add(new Room("301", "Suite", 75.00, true));
+            rooms.Add(new Room("302", "Suite", 80.00, true));
 
 
 
@@ -51,6 +51,9 @@
                     case 1:
                         NewRoom();
                         break;
+                    case 2:
+                        NewGuest();
+                        break;
 
                     default:
                         Console.WriteLine("Invalid choice. Try again."); 
@@ -66,10 +69,10 @@
         public static void NewRoom()
         {
             Console.WriteLine("Enter room number: ");
-            int roomN = int.Parse(Console.ReadLine() ?? "0");
-            if (roomN <= 0)
+            string roomN = Console.ReadLine() ?? "0";
+            if (!int.TryParse(roomN, out int roomNumInt) || roomNumInt <= 0)
             {
-                Console.WriteLine("Room number must be positive ");
+                Console.WriteLine("Invalid room number. Must be a positive number.");
                 return;
             }
             if (rooms.Any(r => r.roomNumber == roomN))
@@ -78,19 +81,38 @@
                 return;
             }
             Console.WriteLine("Enter room type(Single / Double / Suite): ");
-            string type = Console.ReadLine();
+            string type = Console.ReadLine()??"";
 
             Console.WriteLine("Enter price per night: ");
-            int price = int.Parse(Console.ReadLine() ?? "0");
-            if (price <= 0)
+            if (!double.TryParse(Console.ReadLine(), out double price) || price <= 0)
             {
-                Console.WriteLine("price per night must be positive ");
+                Console.WriteLine("Invalid price. Must be a positive number.");
                 return;
             }
             rooms.Add(new Room(roomN, type, price , true));
             Console.WriteLine("Room added successfully!");
             Console.WriteLine($"Room {roomN} | {type} | Price; {price}");
             Console.WriteLine("Total rooms: "+ rooms.Count);
+        }
+
+        public static void NewGuest()
+        {
+            Console.WriteLine("Enter guest name: ");
+            string name = Console.ReadLine() ??"";
+            Console.WriteLine("Enter check in date: ");
+            string date = Console.ReadLine() ?? "";
+            Console.WriteLine("Enter number of nights: ");
+            if (!int.TryParse(Console.ReadLine(), out int nights) || nights <= 0)
+            {
+                Console.WriteLine("Invalid number of nights. Must be a positive integer.");
+                return;
+            }
+            string newguestId = $"G{(guests.Count + 1):D3}";
+
+            Guest new_guest = new Guest(newguestId, name, "Not Assigned", date, nights);
+            guests.Add(new_guest);
+            Console.WriteLine("Guest registered successfully!");
+            Console.WriteLine($"Guest ID: {newguestId} | Name: {name} | Check-in: {date} | Nights: {nights}");
         }
     }
 }

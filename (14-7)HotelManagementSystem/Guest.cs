@@ -6,20 +6,20 @@ namespace _14_7_HotelManagementSystem
 {
     public class Guest
     {
-        public int guestId {  get; set; }
+        public string guestId {  get; set; }
         public string guestName{ get; set; }
         public string roomNumber { get; set; }
         public string checkInDate {  get; set; }
         public int totalNights { get; set; }
 
 
-        public Guest(int Id, string Name, string roomNO, string Date, int Nights)
+        public Guest(string Id, string Name, string roomNO, string Date, int Nights)
         {
-            Id = guestId;
-            Name = guestName;
-            roomNO = roomNumber;
-            Date = checkInDate;
-            Nights = totalNights;
+            guestId = Id;
+            guestName = Name;
+            roomNumber = roomNO;
+            checkInDate = Date;
+            totalNights = Nights;
 
         }
 
