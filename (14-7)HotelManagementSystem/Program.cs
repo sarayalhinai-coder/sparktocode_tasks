@@ -69,6 +69,16 @@
                     case 7:
                         GuestStat();
                         break;
+                    case 8:
+                        UpdatePrice();
+                        break;
+                    case 9:
+                        LookUp();
+                        break;
+                    case 10:
+                        RoomBreakdown();
+                        break;
+
 
                     default:
                         Console.WriteLine("Invalid choice. Try again."); 
@@ -315,5 +325,75 @@
                 Console.WriteLine(line);
             }
         }
+
+        public static void UpdatePrice()
+        {
+            Console.WriteLine("Enter room number: ");
+            string userNo = Console.ReadLine()??"";
+
+            Room room = rooms.FirstOrDefault(r => r.roomNumber == userNo);
+            double oldprice = room.PricePerNight;
+            if (room == null) 
+            {
+                Console.WriteLine("Room not fount");
+                return;
+            }
+            Console.WriteLine("Enter new price per night: ");
+            try
+            {
+                double newprice = double.Parse(Console.ReadLine() ?? "0");
+                room.PricePerNight = newprice;
+                Console.WriteLine($"Price updated: {oldprice} -> {newprice}");
+            }
+            catch(Exception )
+            {
+                Console.WriteLine("New price must be a positive number ");
+                return;
+            }
+        }
+
+        public static void LookUp()
+        {
+            Console.WriteLine("Enter guest name: ");
+            string user_name = Console.ReadLine() ?? "";
+
+            List<Guest> matches = guests.Where(g => g.guestName.Contains(user_name, StringComparison.OrdinalIgnoreCase)).ToList();
+
+            if (matches.Count == 0)
+            {
+                Console.WriteLine("No guests matched that search.");
+                return;
+            }
+
+            Console.WriteLine("Matches found: "+matches.Count);
+
+            foreach (Guest g in matches)
+            {
+                Console.WriteLine($"{g.guestId} | {g.guestName} | Room: {g.roomNumber}");
+            }
+        }
+
+        public static void RoomBreakdown()
+        {
+            List<Room> singles = rooms.Where(r => r.roomType == "Single").ToList();
+            List<Room> doubles = rooms.Where(r => r.roomType == "Double").ToList();
+            List<Room> suites = rooms.Where(r => r.roomType == "Suite").ToList();
+
+            Console.WriteLine("Number of single rooms: " + singles.Count);
+            Console.WriteLine("Number of double rooms: " + doubles.Count);
+            Console.WriteLine("Number of suite rooms: " + suites.Count);
+
+            Console.WriteLine("Average price per night - single: " + (singles.Count == 0 ? "N/A" : singles.Average(r => r.PricePerNight)));
+            Console.WriteLine("Average price per night - double: " + (doubles.Count == 0 ? "N/A" : doubles.Average(r => r.PricePerNight)));
+            Console.WriteLine("Average price per night - suite: " + (suites.Count == 0 ? "N/A" : suites.Average(r => r.PricePerNight)));
+
+            if (rooms.Count == 0)
+                Console.WriteLine("Overall average price: N/A");
+            else
+                Console.WriteLine("Overall average price: " + rooms.Average(r => r.PricePerNight));
+        }
+
+
+
     }
 }
