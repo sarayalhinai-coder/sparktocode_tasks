@@ -66,6 +66,9 @@
                     case 6:
                         FilterRooms();
                         break;
+                    case 7:
+                        GuestStat();
+                        break;
 
                     default:
                         Console.WriteLine("Invalid choice. Try again."); 
@@ -269,6 +272,47 @@
                         Console.WriteLine("Invalid choice.");
                         break;
                 }
+            }
+        }
+
+        public static double GetRoomPrice(string roomNumber)
+        {
+            var room = rooms.FirstOrDefault(r => r.roomNumber == roomNumber);
+            return room != null ? room.PricePerNight : 0;
+        }
+
+
+        public static void GuestStat()
+        {
+            Console.WriteLine("Total registered guests: " + guests.Count);
+            List<Guest> activeGuests = guests.Where(g => g.roomNumber != "Not Assigned").ToList();
+            Console.WriteLine("Total guests who currently have a room assigned:  " + activeGuests.Count);
+
+            Console.WriteLine("Total rooms: " + rooms.Count);
+            Console.WriteLine("Total currently booked rooms: " + rooms.Count(r => !r.IsAvailable));
+
+            if (activeGuests.Count == 0)
+            {
+                Console.WriteLine("No active bookings recorded.");
+                return;
+            }
+
+            Console.WriteLine("Average nights (active bookings): " + activeGuests.Average(g => g.totalNights));
+
+            Console.WriteLine("Top 3 highest-spending guests: ");
+            List<Guest> top3 = activeGuests.OrderByDescending(g => g.CalculateTotalCost(GetRoomPrice(g.roomNumber))).Take(3).ToList();
+            foreach (Guest g in top3)
+            {
+                Console.WriteLine("Guest name: " + g.guestName);
+                Console.WriteLine("Room number: " + g.roomNumber);
+                Console.WriteLine("Total cost: " + g.CalculateTotalCost(GetRoomPrice(g.roomNumber)));
+            }
+
+            Console.WriteLine("Booking summary:");
+            var summary = activeGuests.Select(g => $"{g.guestName} - Room {g.roomNumber} - {g.totalNights} nights - {g.CalculateTotalCost(GetRoomPrice(g.roomNumber)).ToString("F2")}");
+            foreach (var line in summary)
+            {
+                Console.WriteLine(line);
             }
         }
     }
