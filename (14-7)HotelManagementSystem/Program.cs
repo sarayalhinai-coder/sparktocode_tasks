@@ -1,4 +1,6 @@
-﻿namespace _14_7_HotelManagementSystem
+﻿using System.Reflection.PortableExecutable;
+
+namespace _14_7_HotelManagementSystem
 {
     internal class Program
     {
@@ -78,8 +80,21 @@
                     case 10:
                         RoomBreakdown();
                         break;
-
-
+                    case 11:
+                        CheckOut();
+                        break;
+                    case 12:
+                        RemoveRoom();
+                        break;
+                    case 13:
+                        ExtendStay();
+                        break;
+                    case 14:
+                        HighestRevenue();
+                        break;
+                    case 15:
+                        PaginationViewer();
+                        break;
                     default:
                         Console.WriteLine("Invalid choice. Try again."); 
                         break;
@@ -393,6 +408,161 @@
                 Console.WriteLine("Overall average price: " + rooms.Average(r => r.PricePerNight));
         }
 
+        public static void CheckOut()
+        {
+            Console.WriteLine("Enter guest ID:  ");
+            string id = Console.ReadLine()??"";
+
+            Guest guest = guests.FirstOrDefault(g => g.guestId== id);
+            if (guest == null)
+            {
+                Console.WriteLine("Guest not found");
+                return;
+            }
+            if (guest.roomNumber == "Not Assigned")
+            {
+                Console.WriteLine("This guest has no active booking");
+                return;
+            }
+            Room room = rooms.FirstOrDefault(r => r.roomNumber == guest.roomNumber);
+
+            Console.WriteLine("-- final bill --");
+            Console.WriteLine($"Guest: {guest.guestName} | Room: {guest.roomNumber} | Type: {room.roomType}");
+            Console.WriteLine($"Check-in: {guest.checkInDate} | Nights: {guest.totalNights} | Price/night: {room.PricePerNight}");
+            Console.WriteLine($"Total cost: {guest.CalculateTotalCost(room.PricePerNight)}");
+
+            Console.WriteLine("Confirm chechout(Y/N) : ");
+            string confirm = Console.ReadLine() ?? "";
+            if ( confirm.ToUpper() == "Y")
+            {
+                room.IsAvailable = true;
+                guests.Remove(guest);
+            }
+            Console.WriteLine("Checkout complete.");
+            Console.WriteLine($"Remaining guests: {guests.Count} | Total rooms: {rooms.Count}");
+            Console.WriteLine("Room " + guest.roomNumber + " available: " + rooms.Any(r => r.roomNumber == guest.roomNumber && r.IsAvailable));
+        }
+
+        public static void RemoveRoom()
+        {
+            List<Room> unavailable = rooms.Where(r => !r.IsAvailable && !guests.Any(g => g.roomNumber == r.roomNumber)).ToList();
+
+            if (!unavailable.Any())
+            {
+                Console.WriteLine("All unavailable rooms are currently occupied. No rooms can be decommissioned");
+            }
+            List<Room> unavailableSorted = unavailable.OrderBy(r => int.Parse(r.roomNumber)).ToList();
+            foreach (Room room in unavailableSorted) 
+            {
+                room.displayRoom();
+            }
+
+            Console.WriteLine("Count of removable rooms: " + unavailableSorted.Count);
+            Console.WriteLine("Confirm removal (Y/N) : ");
+            string confirm = Console.ReadLine() ?? "";
+            if (confirm.ToUpper() == "Y")
+            {
+                rooms.RemoveAll(r => !r.IsAvailable && !guests.Any(g => g.roomNumber == r.roomNumber));
+                Console.WriteLine("Remaining rooms: " + rooms.Count);
+                var remaining = rooms.Select(r => new { r.roomNumber, r.roomType });
+                foreach(var r in remaining)
+                {
+                    Console.WriteLine($"Room {r.roomNumber} | {r.roomType}");
+                }
+            }
+        }
+
+        public static void ExtendStay()
+        {
+            Console.WriteLine("Enter guest ID:  ");
+            string id = Console.ReadLine() ?? "";
+
+            Guest guest = guests.FirstOrDefault(g => g.guestId == id);
+            if (guest == null)
+            {
+                Console.WriteLine("Guest not found");
+                return;
+            }
+            if (guest.roomNumber == "Not Assigned")
+            {
+                Console.WriteLine("This guest has no active booking to extend.");
+                return;
+            }
+
+            Console.WriteLine("Number of additional nights:  ");
+            try
+            {
+                int additionalNights = int.Parse(Console.ReadLine());
+                if (additionalNights < 0)
+                {
+                    throw new ArgumentOutOfRangeException("Negative numbers are not allowed.");
+                }
+                guest.totalNights += additionalNights;
+            }
+            catch(ArgumentOutOfRangeException )
+            {
+                Console.WriteLine("Negative numbers are not allowed");
+                return;
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("Invalid formatting. input an integer.");
+                return;
+            }
+
+
+            double newCost = guest.CalculateTotalCost(GetRoomPrice(guest.roomNumber));
+
+            Console.WriteLine("-- New nights and cost --- ");
+            Console.WriteLine($"Total nights: {guest.totalNights}");
+            Console.WriteLine($"Cost: {newCost}");
+        }
+
+        public static void HighestRevenue()
+        {
+            List<Guest> active = guests.Where(g => g.roomNumber != "Not Assigned").ToList();
+
+            if (active == null)
+            {
+                Console.WriteLine("No active bookings recorded");
+                return;
+            }
+
+            var topBooking = active
+                .Select(g => new{g.guestName,g.roomNumber,TotalCost = g.CalculateTotalCost(GetRoomPrice(g.roomNumber))})
+                .OrderByDescending(x => x.TotalCost)
+                .Take(1)
+                .First();
+
+            Console.WriteLine("Highest revenue booking:");
+            Console.WriteLine($"{topBooking.guestName} | Room {topBooking.roomNumber} | {topBooking.TotalCost.ToString("F2")}");
+
+        }
+
+        public static void PaginationViewer()
+        {
+            int pageSize = 3;
+            if (!guests.Any())
+            {
+                Console.WriteLine("No guests have been registered yet.");
+                return;
+            }
+            int totalPages = (int)Math.Ceiling(guests.Count / (double)pageSize);
+            Console.Write($"Enter page number (1-{totalPages}): ");
+            if (!int.TryParse(Console.ReadLine(), out int page) || page < 1 || page > totalPages)
+            {
+                Console.WriteLine("That page does not exist.");
+                return;
+            }
+
+            List<Guest> pageGuests = guests.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+            Console.WriteLine($"Page {page} of {totalPages}");
+            foreach (Guest g in pageGuests)
+            {
+                g.displayGuest();
+            }
+
+        }
 
 
     }
