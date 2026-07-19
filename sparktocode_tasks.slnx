@@ -1,4 +1,9 @@
 <Solution>
+  <Folder Name="/Solution Items/">
+    <File Path="databasetask1/airport.jpeg" />
+    <File Path="databasetask1/College.jpeg" />
+    <File Path="databasetask1/Company.jpeg" />
+  </Folder>
   <Project Path="(1-7) task 11/(1-7) task 11.csproj" Id="d1705a44-41c7-4623-b869-68326143df1d" />
   <Project Path="(1-7) task 15/(1-7) task 15.csproj" Id="4383c435-ed82-4a65-ab71-a9b4a628345d" />
   <Project Path="(1-7)task 12/(1-7)task 12.csproj" Id="3a5828ae-00b6-4ef0-a546-69ba099bd830" />
