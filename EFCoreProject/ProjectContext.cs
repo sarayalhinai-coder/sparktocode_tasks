@@ -11,6 +11,15 @@ namespace EFCoreProject
        public DbSet<Employee> employees {  get; set; }
        public DbSet<Department> departments { get; set; }
 
+        public DbSet<Project> projects { get; set; }
+        public DbSet<Dependent> dependents { get; set; }
+
+        public DbSet<DeptLocation> DeptLocations { get; set; }
+
+        public DbSet<empProj> empProjs { get; set; }
+
+
+
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
             options.UseSqlServer(
